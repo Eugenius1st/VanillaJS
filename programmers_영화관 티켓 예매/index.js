@@ -1,6 +1,3 @@
-const $ = (query) => document.querySelector(query);
-const $$ = (element) => document.createElement(element);
-
 // "Login" 유효성 검사 구현하기
 let isEmail = false;
 let isPassword = false;
@@ -93,7 +90,6 @@ function handleAdultBtnClick(idx) {
 }
 function handleYouthBtnClick(idx) {
   if (specialChecked && idx + adultNum > 3) {
-    console.log(specialChecked);
     alert("머쓱관의 장애인 관람석은 3석으로, 3인 이하로 선택해주세요.");
   } else {
     btnInit(adultNum, idx);
