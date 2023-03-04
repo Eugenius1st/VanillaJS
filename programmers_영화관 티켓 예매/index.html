@@ -1,0 +1,154 @@
+<!-- 본 파일은 절대로 수정하지 않습니다. -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>2023 Dev-Matching: 웹 프론트엔드 개발자(상반기)-1</title>
+  </head>
+  <body>
+    <header>
+      <button class="gnb gnb_l" id="loginBtn">로그인</button>
+      <button class="gnb gnb_r" id="theaterBtn">좌석예매</button>
+    </header>
+    <main>
+      <div class="section section-login" id="loginSection">
+        <div class="content">
+          <header>
+            <div>Login Form</div>
+          </header>
+          <section>
+            <div class="input-group">
+              <input
+                type="email"
+                placeholder="이메일을 입력해주세요."
+                id="email"
+              />
+            </div>
+            <div class="input-group">
+              <input
+                type="password"
+                placeholder="비밀번호를 입력해주세요."
+                id="password"
+              />
+            </div>
+            <div class="input-group">
+              <button id="theaterLoginBtn">Login</button>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="section section-theater" id="theaterSection">
+        <div class="col-head" id="theaterSectionHead">인원/좌석</div>
+        <div class="col-body">
+          <div class="info">
+            <div class="section section-numOfPeople">
+              <div class="row" id="numOfPeopleNotice">
+                <span>* 최대 8명 선택 가능</span>
+              </div>
+              <div class="row">
+                <span class="label">어른</span>
+                <div class="btn-group" id="adultBtn">
+                  <button class="btn --general">0</button>
+                  <button class="btn --general">1</button>
+                  <button class="btn --general">2</button>
+                  <button class="btn --general">3</button>
+                  <button class="btn --general">4</button>
+                  <button class="btn --general">5</button>
+                  <button class="btn --general">6</button>
+                  <button class="btn --general">7</button>
+                  <button class="btn --general">8</button>
+                </div>
+              </div>
+              <div class="row">
+                <span class="label">어린이/청소년</span>
+                <div class="btn-group" id="youthBtn">
+                  <button class="btn --youth">0</button>
+                  <button class="btn --youth">1</button>
+                  <button class="btn --youth">2</button>
+                  <button class="btn --youth">3</button>
+                  <button class="btn --youth">4</button>
+                  <button class="btn --youth">5</button>
+                  <button class="btn --youth">6</button>
+                  <button class="btn --youth">7</button>
+                  <button class="btn --youth">8</button>
+                </div>
+                <div class="checkbox">
+                  <input
+                    id="checkHandicap"
+                    type="checkbox"
+                    name="handicap"
+                    value="handicap"
+                  />
+                  장애인
+                </div>
+              </div>
+            </div>
+            <div class="section section-reserveInfo" id="reserveInfo">
+              <div class="row">
+                <div class="reserve-info">
+                  그렙 씨네마 | 머쓱관 | 잔여좌석
+                  <span id="remainSeatCnt">39</span>/39
+                </div>
+              </div>
+              <div class="row"><span>2023.03.04(토) 16:30 ~ 19:11</span></div>
+              <div class="row">
+                총 금액&nbsp;&nbsp;<span id="amount">0</span>원
+              </div>
+            </div>
+          </div>
+          <div class="theater">
+            <div class="section section-seat">
+              <div id="screenArea">Screen</div>
+              <div class="seat-group">
+                <div id="seatRow">
+                  <span>A</span>
+                  <span>B</span>
+                  <span>C</span>
+                </div>
+                <div id="theaterSeat"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-footer">
+          <button id="reselect">좌석 선택 초기화</button>
+        </div>
+      </div>
+    </main>
+    <script>
+      // 본 파일은 절대로 수정하지 않습니다.
+      let loginBtn = document.getElementById("loginBtn");
+      let theaterBtn = document.getElementById("theaterBtn");
+      let theaterLoginBtn = document.getElementById("theaterLoginBtn");
+
+      let loginSection = document.getElementById("loginSection");
+      let theaterSection = document.getElementById("theaterSection");
+
+      loginBtn.addEventListener("click", () => {
+        theaterSection.style.display = "none";
+        loginSection.style.display = "block";
+      });
+
+      theaterBtn.addEventListener("click", () => {
+        loginSection.style.display = "none";
+        theaterSection.style.display = "block";
+      });
+
+      for (let i = 0; i < 39; i++) {
+        const seatBtn = document.createElement("button");
+        seatBtn.setAttribute("class", "seat disabled");
+        seatBtn.appendChild(document.createTextNode((i % 13) + 1));
+        document.getElementById("theaterSeat").appendChild(seatBtn);
+
+        if (parseInt(i / 13) === 2) {
+          if (i % 13 > 9) seatBtn.classList.add("handicap");
+          else seatBtn.classList.add("musseukbox");
+        }
+      }
+    </script>
+    <script src="./index.js"></script>
+  </body>
+</html>
